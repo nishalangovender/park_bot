@@ -3,9 +3,9 @@
 <package format="3">
   <name>park_bot</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Mechatronic Project 488 Autonomous Parking of a 4WS Vehicle</description>
   <maintainer email="nishalan.govender@gmail.com">Nishalan Govender</maintainer>
-  <license>TODO: License declaration</license>
+  <license>No official license</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
