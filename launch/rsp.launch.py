@@ -4,10 +4,7 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
-from launch.actions import IncludeLaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.conditions import IfCondition
 from launch_ros.actions import Node
 
 import xacro
@@ -31,13 +28,6 @@ def generate_launch_description():
         output='screen',
         parameters=[params]
     )
-
-    # Gazebo
-    gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([os.path.join(
-            get_package_share_directory('ros_gz_sim'), 'launch'), '/gz_sim.launch.py']),
-            launch_arguments={'gz_args': '-r empty.sdf'}.items(),
-        )
     
     # Launch
     return LaunchDescription([
@@ -46,17 +36,5 @@ def generate_launch_description():
             default_value='false',
             description='Use sim time if true'),
 
-        robot_state_publisher,
-        gazebo,
+        robot_state_publisher
     ])
-
-    # Spawn Entity
-    # spawn = Node(package='ros_gz_sim', executable='create',
-    #                 arguments=[
-    #                     'name', 'my_park_bot',
-    #                     '-x', '0',
-    #                     '-y', '0',
-    #                     '-z', '0',
-    #                     '-topic', 'robot_description',
-    #                     '-entity', 'my_bot'],
-    #                 output='screen')
