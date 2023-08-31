@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="park_world">
+
+    <!-- Template -->
+<!--     <include>
+      <name>Coke</name>
+      <pose>0 0 0 0 0 0</pose>
+      <uri>https://</uri>
+    </include> -->
+
+    <!-- Global Light Source -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
+    </include>
+
+    <!-- Ground Plane -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Ground Plane</uri>
+    </include>
+    <!-- Pavement Plane -->
+<!--     <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Pavement Plane</uri>
+    </include> -->
+
+    <!-- Asphalt Plane -->
+<!--     <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Asphalt Plane</uri>
+    </include> -->
+
+    <!-- Construction Cone -->
+    <include>
+      <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Cone</uri>
+    </include>
+
+    <!-- Wall -->
+<!--     <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
+    </include> -->
+
+  </world>
+</sdf>
