@@ -1,28 +1,32 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
+    <!-- Properties -->
+
+    <!-- Camera -->
+    <xacro:property name="camera_offset_x" value="${chassis_length/2}"/>
+    <xacro:property name="camera_offset_y" value="0"/>
+    <xacro:property name="camera_offset_z" value="${chassis_height/2}"/>
+    <xacro:property name="camera_radius" value="0.010"/>
+    <xacro:property name="camera_thickness" value="0.03"/>
+
+    <!-- Camera Link -->
+
     <joint name="camera_joint" type="fixed">
         <parent link="chassis_link"/>
         <child link="camera_link"/>
-        <origin xyz="0.276 0 0.181" rpy="0 0.18 0"/>
+        <origin xyz="0.15 0 0.065" rpy="0 0 0"/>
     </joint>
 
     <link name="camera_link">
         <visual>
+            <origin xyz="${camera_thickness/2} 0 0" rpy="0 ${pi/2} 0"/>
             <geometry>
-                <box size="0.010 0.03 0.03"/>
-            </geometry>
-            <material name="black"/>
-        </visual>
-        <visual>
-            <origin xyz="0 0 -0.05"/>
-            <geometry>
-                <cylinder radius="0.002" length="0.1"/>
+                <cylinder radius="${camera_radius}" length="${camera_thickness}"/>
             </geometry>
             <material name="black"/>
         </visual>
     </link>
-
 
     <joint name="camera_optical_joint" type="fixed">
         <parent link="camera_link"/>
@@ -32,8 +36,6 @@
 
     <link name="camera_link_optical"></link>
 
-
-
     <gazebo reference="camera_link">
         <material>Gazebo/Black</material>
 
@@ -41,6 +43,7 @@
             <pose> 0 0 0 0 0 0 </pose>
             <visualize>true</visualize>
             <update_rate>10</update_rate>
+            <topic>camerae</topic>
             <camera>
                 <horizontal_fov>1.089</horizontal_fov>
                 <image>
@@ -53,9 +56,7 @@
                     <far>8.0</far>
                 </clip>
             </camera>
-            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-                <frame_name>camera_link_optical</frame_name>
-            </plugin>
+            <plugin filename="ignition-gazebo-sensors-system" name="gz::sim::systems::Sensors"></plugin>
         </sensor>
     </gazebo>
 

@@ -2,13 +2,6 @@
 <sdf version="1.5">
   <world name="park_world">
 
-    <!-- Template -->
-<!--     <include>
-      <name>Coke</name>
-      <pose>0 0 0 0 0 0</pose>
-      <uri>https://</uri>
-    </include> -->
-
     <!-- Global Light Source -->
     <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
@@ -18,6 +11,7 @@
     <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Ground Plane</uri>
     </include>
+
     <!-- Pavement Plane -->
 <!--     <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Pavement Plane</uri>
@@ -28,15 +22,46 @@
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Asphalt Plane</uri>
     </include> -->
 
-    <!-- Construction Cone -->
+    <!-- Wall -->
     <include>
-      <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Cone</uri>
+      <name>Brick Wall</name>
+      <pose>5 0 0 0 0 0</pose>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
     </include>
 
-    <!-- Wall -->
-<!--     <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-    </include> -->
+    <!-- Parking Line -->
+    <include>
+      <name>Parking Line 1</name>
+      <pose>1 2 0 0 0 0</pose>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/DRC Practice: Yellow parking block</uri>
+    </include>
+    <include>
+      <name>Parking Line 2</name>
+      <pose>2 2 0 0 0 0</pose>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/DRC Practice: Yellow parking block</uri>
+    </include>
+    <include>
+      <name>Parking Line 3</name>
+      <pose>3 2 0 0 0 0</pose>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/DRC Practice: Yellow parking block</uri>
+    </include>
+    <include>
+      <name>Parking Line 4</name>
+      <pose>4 2 0 0 0 0</pose>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/DRC Practice: Yellow parking block</uri>
+    </include>
+
+    <!-- Construction Cone -->
+    <include>
+      <name>Cone 1</name>
+      <pose>1.5 2 0 0 0 0</pose>
+      <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Cone</uri>
+    </include>
+    <include>
+      <name>Cone 2</name>
+      <pose>3.5 2 0 0 0 0</pose>
+      <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Cone</uri>
+    </include>
 
   </world>
 </sdf>
