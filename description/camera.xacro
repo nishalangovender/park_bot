@@ -4,23 +4,19 @@
     <!-- Properties -->
 
     <!-- Camera -->
-    <xacro:property name="camera_offset_x" value="${chassis_length/2}"/>
-    <xacro:property name="camera_offset_y" value="0"/>
-    <xacro:property name="camera_offset_z" value="${chassis_height/2}"/>
-    <xacro:property name="camera_radius" value="0.010"/>
-    <xacro:property name="camera_thickness" value="0.03"/>
-
-    <!-- Camera Link -->
+    <xacro:property name="camera_offset_x" value="${(chassis_length+camera_thickness)/2}"/>
+    <xacro:property name="camera_radius" value="0.015"/>
+    <xacro:property name="camera_thickness" value="0.01"/>
 
     <joint name="camera_joint" type="fixed">
         <parent link="chassis_link"/>
         <child link="camera_link"/>
-        <origin xyz="0.15 0 0.065" rpy="0 0 0"/>
+        <origin xyz="${camera_offset_x} 0 0" rpy="0 ${pi/2} 0"/>
     </joint>
 
     <link name="camera_link">
         <visual>
-            <origin xyz="${camera_thickness/2} 0 0" rpy="0 ${pi/2} 0"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <cylinder radius="${camera_radius}" length="${camera_thickness}"/>
             </geometry>
@@ -43,7 +39,7 @@
             <pose> 0 0 0 0 0 0 </pose>
             <visualize>true</visualize>
             <update_rate>10</update_rate>
-            <topic>camerae</topic>
+            <topic>camera</topic>
             <camera>
                 <horizontal_fov>1.089</horizontal_fov>
                 <image>
