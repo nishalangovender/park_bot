@@ -2,9 +2,9 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
     <joint name="laser_joint" type="fixed">
-        <parent link="chassis"/>
+        <parent link="chassis_link"/>
         <child link="laser_frame"/>
-        <origin xyz="0.122 0 0.212" rpy="0 0 0"/>
+        <origin xyz="0 0 0.212" rpy="0 0 0"/>
     </joint>
 
     <link name="laser_frame">
@@ -53,7 +53,7 @@
                     <max>12</max>
                 </range>
             </ray>
-            <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+            <plugin filename="ignition-gazebo-sensors-system" name="gz::sim::systems::Sensors">
                 <ros>
                     <argument>~/out:=scan</argument>
                 </ros>

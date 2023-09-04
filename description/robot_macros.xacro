@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="properties.xacro" />
+
+    <!-- Wheel Link -->
+    <xacro:macro name="wheel_link" params="prefix">
+        <link name="${prefix}_wheel_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${wheel_thickness}" />
+                </geometry>
+                <material name="blue" />
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${wheel_thickness}" />
+                </geometry>
+            </collision>
+            <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_thickness}"
+                radius="${wheel_radius}">
+                <origin xyz="0 0 0" rpy="0 0 0" />
+            </xacro:inertial_cylinder>
+        </link>
+        <gazebo reference="${prefix}_wheel">
+            <material>Gazebo/Blue</material>
+        </gazebo>
+    </xacro:macro>
+
+    <!-- Steering Joints -->
+    <xacro:macro name="steering_joint" params="prefix">
+        <joint name="${prefix}_steering_joint" type="revolute">
+            <origin xyz="${wheel_offset_x} ${wheel_offset_y} -${wheel_offset_z}" rpy="0 0 0" />
+            <parent link="chassis_link" />
+            <child link="${prefix}_wheel_link" />
+            <axis xyz="0 0 1" />
+            <limit lower="0" upper="${pi/4}" effort="1" velocity="1" />
+        </joint>
+    </xacro:macro>
+
+    <!-- Wheel Joints -->
+    <xacro:macro name="wheel_joint" params="prefix front left">
+        <joint name="${prefix}_wheel_joint" type="continuous">
+            <origin xyz="${front*wheel_offset_x} ${left*wheel_offset_y} -${wheel_offset_z}"
+                rpy="${-1*left*pi/2} 0 0" />
+            <parent link="chassis_link" />
+            <child link="${prefix}_wheel_link" />
+            <axis xyz="0 0 ${left}" />
+        </joint>
+    </xacro:macro>
+
+</robot>
