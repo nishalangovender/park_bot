@@ -14,35 +14,38 @@
     <!-- Chasis Link -->
     <link name="chassis_link">
         <visual>
-            <origin xyz="0 0 ${chassis_height/2}" />
+            <origin xyz="0 0 0" />
             <geometry>
                 <box size="${chassis_length} ${chassis_width} ${chassis_height}" />
             </geometry>
             <material name="white" />
         </visual>
         <collision>
-            <origin xyz="0 0 ${-chassis_height/2}" />
+            <origin xyz="0 0 0" />
             <geometry>
                 <box size="${chassis_length} ${chassis_width} ${chassis_height}" />
             </geometry>
         </collision>
         <xacro:inertial_box mass="${chassis_mass}" x="${chassis_length}" y="${chassis_width}"
             z="${chassis_height}">
-            <origin xyz="0 0 ${-chassis_height/2}" rpy="0 0 0" />
+            <origin xyz="0 0 0" />
         </xacro:inertial_box>
     </link>
     <gazebo reference="chassis">
         <material>Gazebo/White</material>
     </gazebo>
 
+    <!-- Steering Links -->
+    <xacro:steering_link prefix="front_left" />
+    <xacro:steering_link prefix="front_right" />
+    <xacro:steering_link prefix="rear_left" />
+    <xacro:steering_link prefix="rear_right" />
+
     <!-- Wheel Links -->
     <xacro:wheel_link prefix="front_left" />
     <xacro:wheel_link prefix="front_right" />
     <xacro:wheel_link prefix="rear_left" />
     <xacro:wheel_link prefix="rear_right" />
-
-    <!-- Steering Links -->
-    <link name="front_left_steering_link"/>
 
     <!-- ================================ Joints ================================ -->
 
@@ -54,28 +57,39 @@
     </joint>
 
     <!-- Steering Joints -->
-    <xacro:steering_joint prefix="front_left" />
-    <xacro:steering_joint prefix="front_right" />
-    <xacro:steering_joint prefix="rear_left" />
-    <xacro:steering_joint prefix="rear_right" />
+    <xacro:steering_joint prefix="front_left" front="1" left="1" />
+    <xacro:steering_joint prefix="front_right" front="1" left="-1" />
+    <xacro:steering_joint prefix="rear_left" front="-1" left="1" />
+    <xacro:steering_joint prefix="rear_right" front="-1" left="-1" />
 
     <!-- Wheel Joints -->
-    <xacro:wheel_joint prefix="front_left" front="1" left="1" />
-    <xacro:wheel_joint prefix="front_right" front="1" left="-1" />
-    <xacro:wheel_joint prefix="rear_left" front="-1" left="1" />
-    <xacro:wheel_joint prefix="rear_right" front="-1" left="-1" />
+    <xacro:wheel_joint prefix="front_left" left="1" />
+    <xacro:wheel_joint prefix="front_right" left="-1" />
+    <xacro:wheel_joint prefix="rear_left" left="1" />
+    <xacro:wheel_joint prefix="rear_right" left="-1" />
 
     <!-- ============================= Transmission ============================= -->
 
-    <transmission name="trans_front_left_wheel_rotate">
+    <transmission name="steer_front_left_wheel">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="front_left_rotate">
-          <hardwareInterface>EffortJointInterface</hardwareInterface>
+        <joint name="front_left_steering_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_front_left_steering">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="drive_front_left_wheel">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="front_left_wheel_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="motor_front_left_wheel">
-          <hardwareInterface>EffortJointInterface</hardwareInterface>
-          <mechanicalReduction>1</mechanicalReduction>
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
         </actuator>
-      </transmission>
+    </transmission>
 
 </robot>

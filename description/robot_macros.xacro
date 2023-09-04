@@ -3,6 +3,32 @@
 
     <xacro:include filename="properties.xacro" />
 
+    <!-- Steering Link -->
+    <xacro:macro name="steering_link" params="prefix">
+        <link name="${prefix}_steering_link">
+            <visual name="">
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="${steering_radius}" length="${steering_length}"/>
+                </geometry>
+                <material name="blue"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="${steering_radius}" length="${steering_length}"/>
+                </geometry>
+            </collision>
+            <xacro:inertial_cylinder mass="${steering_mass}" length="${steering_length}"
+                radius="${steering_radius}">
+                <origin xyz="0 0 0" rpy="0 0 0" />
+            </xacro:inertial_cylinder>
+        </link>
+        <gazebo reference="${prefix}_steering">
+            <material>Gazebo/Blue</material>
+        </gazebo>
+    </xacro:macro>
+
     <!-- Wheel Link -->
     <xacro:macro name="wheel_link" params="prefix">
         <link name="${prefix}_wheel_link">
@@ -30,22 +56,23 @@
     </xacro:macro>
 
     <!-- Steering Joints -->
-    <xacro:macro name="steering_joint" params="prefix">
+    <xacro:macro name="steering_joint" params="prefix front left">
         <joint name="${prefix}_steering_joint" type="revolute">
-            <origin xyz="${wheel_offset_x} ${wheel_offset_y} -${wheel_offset_z}" rpy="0 0 0" />
+            <origin xyz="${front*steering_offset_x} ${left*steering_offset_y} -${steering_offset_z}" 
+                rpy="${-1*left*pi/2} 0 0" />
             <parent link="chassis_link" />
-            <child link="${prefix}_wheel_link" />
-            <axis xyz="0 0 1" />
-            <limit lower="0" upper="${pi/4}" effort="1" velocity="1" />
+            <child link="${prefix}_steering_link" />
+            <axis xyz="0 ${left} 0" />
+            <limit lower="-${pi/4}" upper="${pi/4}" effort="100" velocity="1" />
         </joint>
     </xacro:macro>
 
     <!-- Wheel Joints -->
-    <xacro:macro name="wheel_joint" params="prefix front left">
+    <xacro:macro name="wheel_joint" params="prefix left">
         <joint name="${prefix}_wheel_joint" type="continuous">
-            <origin xyz="${front*wheel_offset_x} ${left*wheel_offset_y} -${wheel_offset_z}"
-                rpy="${-1*left*pi/2} 0 0" />
-            <parent link="chassis_link" />
+            <origin xyz="0 0 ${wheel_offset_z}"
+                rpy="0 0 0" />
+            <parent link="${prefix}_steering_link" />
             <child link="${prefix}_wheel_link" />
             <axis xyz="0 0 ${left}" />
         </joint>
