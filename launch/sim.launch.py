@@ -11,7 +11,7 @@ from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
-import xacro
+# import xacro
 
 
 def generate_launch_description():
@@ -19,7 +19,7 @@ def generate_launch_description():
     # Package Names
     pkg_name = 'park_bot'
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
-    pkg_ign_ros2_control = get_package_share_directory('ign_ros2_control_demos')
+    # pkg_ign_ros2_control = get_package_share_directory('ign_ros2_control_demos')
 
     # Use Sim Time
     use_sim_time = LaunchConfiguration('use_sim_time', default=True)
@@ -36,16 +36,14 @@ def generate_launch_description():
     launch_gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [os.path.join(pkg_ros_gz_sim, 'launch'), '/gz_sim.launch.py']),
-            launch_arguments=[('gz_args', ['-r src/park_bot/worlds/park.world'])])
+            launch_arguments=[('gz_args', ['-r empty.sdf'])])
+            # launch_arguments=[('gz_args', ['-r src/park_bot/worlds/park.world'])])
     
     # Spawn
     spawn_entity = Node(
         package='ros_gz_sim', 
         executable='create',
         arguments=['-topic', 'robot_description',
-                    '-x', '0',
-                    '-y', '0',
-                    '-z', '0.065',
                     '-entity', 'my_bot'],
         output='screen')
     
@@ -63,7 +61,6 @@ def generate_launch_description():
         output='screen'
     )
     
-
     gz_joint_controller = RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=spawn_entity,

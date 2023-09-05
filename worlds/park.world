@@ -30,7 +30,7 @@
     </include>
 
     <!-- Parking Line -->
-    <include>
+    <!-- <include>
       <name>Parking Line 1</name>
       <pose>1 2 0 0 0 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/DRC Practice: Yellow parking block</uri>
@@ -49,7 +49,7 @@
       <name>Parking Line 4</name>
       <pose>4 2 0 0 0 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/DRC Practice: Yellow parking block</uri>
-    </include>
+    </include> -->
 
     <!-- Construction Cone -->
     <include>
