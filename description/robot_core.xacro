@@ -70,7 +70,7 @@
 
     <!-- ============================= Transmission ============================= -->
 
-    <transmission name="steer_front_left_wheel">
+    <!-- <transmission name="steer_front_left_wheel">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="front_left_steering_joint">
             <hardwareInterface>EffortJointInterface</hardwareInterface>
@@ -90,6 +90,6 @@
             <hardwareInterface>EffortJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
-    </transmission>
+    </transmission> -->
 
 </robot>

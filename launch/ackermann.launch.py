@@ -9,7 +9,6 @@ from launch_ros.actions import Node
 
 import xacro
 
-
 def generate_launch_description():
 
     # Check Use Sim Time

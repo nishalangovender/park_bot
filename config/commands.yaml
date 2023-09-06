@@ -1,0 +1,7 @@
+steering_command:
+  delta_A: 0.5  # Example value for steering angle delta_A in radians
+  delta_B: -0.3  # Example value for steering angle delta_B in radians
+
+wheel_command:
+  front_wheel_velocity: 2.0  # Example value for front wheel velocity in m/s
+  rear_wheel_velocity: 1.5  # Example value for rear wheel velocity in m/s
