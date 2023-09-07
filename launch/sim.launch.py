@@ -3,10 +3,10 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import ExecuteProcess
+# from launch.actions import ExecuteProcess
 from launch.actions import IncludeLaunchDescription
-from launch.actions import RegisterEventHandler
-from launch.event_handlers import OnProcessExit
+# from launch.actions import RegisterEventHandler
+# from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
@@ -26,31 +26,44 @@ def generate_launch_description():
         launch_arguments={'use_sim_time': 'true'}.items())
 
     # Gazebo
-    launch_ignition = IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                [os.path.join(get_package_share_directory('ros_ign_gazebo'),
-                              'launch', 'ign_gazebo.launch.py')]),
-            launch_arguments=[('gz_args', [' -r src/park_bot/worlds/park.world'])])
+    # launch_ignition = IncludeLaunchDescription(
+    #         PythonLaunchDescriptionSource(
+    #             [os.path.join(get_package_share_directory('ros_ign_gazebo'),
+    #                           'launch', 'ign_gazebo.launch.py')]),
+    #         launch_arguments=[('gz_args', [' -r src/park_bot/worlds/park.world'])])
 
     # Spawn
     ignition_spawn_entity = Node(
         package='ros_gz_sim',
         executable='create',
         arguments=['-topic', 'robot_description',
-                   '-entity', 'my_bot'],
+                   '-entity', 'my_bot',
+                   '-world', 'src/park_bot/worlds/park.world'],
         output='screen')
+    
+    fws_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["fws_controller"]
+    )
+
+    joint_state_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster"]
+    )
 
     # State Controller
-    load_joint_state_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'joint_state_broadcaster'],
-        output='screen')
+    # load_joint_state_controller = ExecuteProcess(
+    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+    #          'joint_state_broadcaster'],
+    #     output='screen')
 
     # Trajectory Controller
-    load_joint_trajectory_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'fws_controller'],
-        output='screen')
+    # load_joint_trajectory_controller = ExecuteProcess(
+    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+    #          'fws_controller'],
+    #     output='screen')
 
     # Bridge
     bridge = Node(
@@ -59,24 +72,26 @@ def generate_launch_description():
         arguments=['/clock@rosgraph_msgs/msg/Clock]ignition.msgs.Clock'],
         output='screen')
 
-    gz_joint_controller = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=ignition_spawn_entity,
-            on_exit=[load_joint_state_controller],))
+    # gz_joint_controller = RegisterEventHandler(
+    #     event_handler=OnProcessExit(
+    #         target_action=ignition_spawn_entity,
+    #         on_exit=[load_joint_state_controller],))
 
-    gz_trajectory_controller = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=load_joint_state_controller,
-            on_exit=[load_joint_trajectory_controller],))
+    # gz_trajectory_controller = RegisterEventHandler(
+    #     event_handler=OnProcessExit(
+    #         target_action=load_joint_state_controller,
+    #         on_exit=[load_joint_trajectory_controller],))
 
     # Launch
     return LaunchDescription([
         node_robot_state_publisher,
-        launch_ignition,
+        # launch_ignition,
         ignition_spawn_entity,
+        fws_controller_spawner,
+        joint_state_broadcaster_spawner,
         bridge,
-        gz_joint_controller,
-        gz_trajectory_controller,
+        # gz_joint_controller,
+        # gz_trajectory_controller,
     ])
 
     # Bridge
