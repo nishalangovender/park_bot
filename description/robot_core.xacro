@@ -68,28 +68,4 @@
     <xacro:wheel_joint prefix="rear_left" left="1" />
     <xacro:wheel_joint prefix="rear_right" left="-1" />
 
-    <!-- ============================= Transmission ============================= -->
-
-    <!-- <transmission name="steer_front_left_wheel">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="front_left_steering_joint">
-            <hardwareInterface>EffortJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="motor_front_left_steering">
-            <hardwareInterface>EffortJointInterface</hardwareInterface>
-            <mechanicalReduction>1</mechanicalReduction>
-        </actuator>
-    </transmission>
-
-    <transmission name="drive_front_left_wheel">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="front_left_wheel_joint">
-            <hardwareInterface>EffortJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="motor_front_left_wheel">
-            <hardwareInterface>EffortJointInterface</hardwareInterface>
-            <mechanicalReduction>1</mechanicalReduction>
-        </actuator>
-    </transmission> -->
-
 </robot>

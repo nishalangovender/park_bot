@@ -1,48 +1,3 @@
-""" import os
-
-from ament_index_python.packages import get_package_share_directory
-
-from launch import LaunchDescription
-from launch.substitutions import LaunchConfiguration
-from launch.actions import DeclareLaunchArgument
-from launch_ros.actions import Node
-
-import xacro
-
-
-def generate_launch_description():
-
-    # Check Use Sim Time
-    use_sim_time = LaunchConfiguration('use_sim_time')
-
-    # Process URDF File
-    pkg_name = 'park_bot'
-    pkg_path = os.path.join(get_package_share_directory(pkg_name))
-    xacro_file = os.path.join(pkg_path, 
-                              'description', 
-                              'robot.urdf.xacro')
-    doc = xacro.parse(open(xacro_file))
-    xacro.process_doc(doc)
-    params = {'robot_description': doc.toxml(), 'use_sim_time': use_sim_time}
-
-    print(params)
-
-    # Robot State Publisher
-    node_robot_state_publisher = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        output='screen',
-        parameters=[params]
-    )
-
-    # Launch
-    return LaunchDescription([
-        node_robot_state_publisher,
-        DeclareLaunchArgument('use_sim_time', default_value=use_sim_time,
-                              description='If true, use simulated clock'),
-    ])
- """
-
 import os
 
 from ament_index_python.packages import get_package_share_directory
@@ -52,39 +7,58 @@ from launch.substitutions import LaunchConfiguration, Command
 from launch.actions import DeclareLaunchArgument
 from launch_ros.actions import Node
 
-import xacro
+# import xacro
+
 
 def generate_launch_description():
 
-    # Check Use Sim Time
+    # Parameters
     use_sim_time = LaunchConfiguration('use_sim_time')
     use_ros2_control = LaunchConfiguration('use_ros2_control')
 
     # Process URDF File
-    pkg_path = os.path.join(get_package_share_directory('park_bot'))
-    xacro_file = os.path.join(pkg_path,'description','robot.urdf.xacro')
+    pkg_name = 'park_bot'
+    pkg_path = os.path.join(get_package_share_directory(pkg_name))
+    xacro_file = os.path.join(pkg_path, 'description', 'robot.urdf.xacro')
     # robot_description_config = xacro.process_file(xacro_file)
     robot_description_config = Command(['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control, ' sim_mode:=', use_sim_time])
-    
-    # Robot State Publisher
     params = {'robot_description': robot_description_config, 'use_sim_time': use_sim_time}
+
+    # Robot State Publisher Node
     node_robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
-        parameters=[params]
-    )
+        parameters=[params])
+
+    # Joint State Publisher Node
+    node_joint_state_publisher = Node(
+        package='joint_state_publisher_gui',
+        executable='joint_state_publisher_gui',
+        output='screen')
     
-    # Launch
-    return LaunchDescription([
-        DeclareLaunchArgument(
-            'use_sim_time',
-            default_value='false',
-            description='Use sim time if true'),
-        DeclareLaunchArgument(
+    # RViz
+    rviz = Node(
+        package='rviz2',
+        executable='rviz2',
+        arguments=['-d', 'src/park_bot/config/view_bot.rviz'],
+        parameters=[params],
+        output='screen')
+
+    # Launch Arguments
+    sim_time_args = DeclareLaunchArgument(
+        'use_sim_time',
+        default_value='true',
+        description='Use sim time if true')
+    
+    ros2_control_args = DeclareLaunchArgument(
             'use_ros2_control',
             default_value='true',
-            description='Use ros2_control if true'),
+            description='Use ros2_control if true')
 
-        node_robot_state_publisher
-    ])
+    # Launch
+    return LaunchDescription([sim_time_args,
+                              ros2_control_args,
+                              node_robot_state_publisher,
+                              node_joint_state_publisher,
+                              rviz])

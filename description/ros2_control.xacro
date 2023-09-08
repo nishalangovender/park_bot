@@ -12,20 +12,20 @@
 
             <!-- Joints -->
             <joint name="${prefix}_steering_joint">
-                <command_interface name="steering_position">
-                    <param name="min">{-2*pi}</param>
-                    <param name="max">{2*pi}</param>
+                <command_interface name="position">
+                    <param name="min">{-pi/4}</param>
+                    <param name="max">{pi/4}</param>
                 </command_interface>
-                <state_interface name="steering_position">
-                    <param name="initial_value">0.0</param>
-                </state_interface>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
             </joint>
             <joint name="${prefix}_wheel_joint">
-                <command_interface name="wheel_velocity">
-                    <param name="min">-3.15</param>
-                    <param name="max">3.15</param>
+                <command_interface name="velocity">
+                    <param name="min">-10</param>
+                    <param name="max">10</param>
                 </command_interface>
-                <state_interface name="wheel_velocity" />
+                <state_interface name="position" />
+                <state_interface name="velocity" />
             </joint>
 
         </ros2_control>
@@ -43,7 +43,7 @@
         <!-- Joint State Publisher -->
         <plugin filename="ign_ros2_control-system"
             name="ign_ros2_control::IgnitionROS2ControlPlugin">
-            <parameters>$(find park_bot)/config/fws_controller.yaml</parameters>
+            <parameters>$(find park_bot)/config/my_controller.yaml</parameters>
         </plugin>
     </gazebo>
 
