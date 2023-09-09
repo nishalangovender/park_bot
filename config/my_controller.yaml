@@ -1,7 +1,71 @@
 controller_manager:
   ros__parameters:
     use_sim_time: true
-    update_rate: 100  # Hz
+    update_rate: 1000  # Hz
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
+
+    steering_position_controller:
+      type: position_controllers/JointGroupPositionController
+
+    wheel_velocity_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
+    steering_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    wheel_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+steering_position_controller:
+  ros__parameters:
+    joints:
+      - front_left_steering_joint
+      - front_right_steering_joint
+      - rear_left_steering_joint
+      - rear_right_steering_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+
+wheel_velocity_controller:
+  ros__parameters:
+    joints:
+      - front_left_wheel_joint
+      - front_right_wheel_joint
+      - rear_left_wheel_joint
+      - rear_right_wheel_joint
+    command_interfaces:
+      - velocity
+    state_interfaces:
+      - position
+      - velocity
+
+steering_trajectory_controller:
+  ros__parameters:
+    joints:
+      - front_left_steering_joint
+      - front_right_steering_joint
+      - rear_left_steering_joint
+      - rear_right_steering_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+
+wheel_trajectory_controller:
+  ros__parameters:
+    joints:
+      - front_left_wheel_joint
+      - front_right_wheel_joint
+      - rear_left_wheel_joint
+      - rear_right_wheel_joint
+    command_interfaces:
+      - velocity
+    state_interfaces:
+      - position
+      - velocity

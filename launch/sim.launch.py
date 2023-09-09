@@ -20,10 +20,8 @@ def generate_launch_description():
     pkg_name = 'park_bot'
     pkg_path = os.path.join(get_package_share_directory(pkg_name))
     xacro_file = os.path.join(pkg_path, 'description', 'robot.urdf.xacro')
-    robot_description_config = Command(
-        ['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control, ' sim_mode:=', use_sim_time])
-    params = {'robot_description': robot_description_config,
-              'use_sim_time': use_sim_time}
+    robot_description_config = Command(['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control, ' sim_mode:=', use_sim_time])
+    params = {'robot_description': robot_description_config, 'use_sim_time': use_sim_time}
 
     # Robot State Publisher Node
     node_robot_state_publisher = Node(
@@ -47,6 +45,22 @@ def generate_launch_description():
                    '-entity', 'my_bot'],
         output='screen')
 
+    # Controller Spawner
+    steering_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["steering_position_controller"])
+    
+    wheel_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["wheel_velocity_controller"])
+
+    joint_broad_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster"])
+
     # Launch Arguments
     sim_time_args = DeclareLaunchArgument(
         'use_sim_time',
@@ -63,4 +77,7 @@ def generate_launch_description():
                               ros2_control_args,
                               node_robot_state_publisher,
                               launch_ignition,
-                              ignition_spawn_entity])
+                              ignition_spawn_entity,
+                              steering_controller_spawner,
+                              wheel_controller_spawner,
+                              joint_broad_spawner])
