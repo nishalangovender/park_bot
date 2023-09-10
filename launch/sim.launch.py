@@ -44,17 +44,28 @@ def generate_launch_description():
         arguments=['-topic', 'robot_description',
                    '-entity', 'my_bot'],
         output='screen')
+    
+    # Bridge
+    bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan'],
+        output='screen')
 
     # Controller Spawner
-    steering_controller_spawner = Node(
+    fws_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["steering_position_controller"])
+        arguments=["fws_controller"])
+    # steering_controller_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["steering_position_controller"])
     
-    wheel_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["wheel_velocity_controller"])
+    # wheel_controller_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["wheel_velocity_controller"])
 
     joint_broad_spawner = Node(
         package="controller_manager",
@@ -78,6 +89,8 @@ def generate_launch_description():
                               node_robot_state_publisher,
                               launch_ignition,
                               ignition_spawn_entity,
-                              steering_controller_spawner,
-                              wheel_controller_spawner,
+                              bridge,
+                              fws_controller_spawner,
+                            #   steering_controller_spawner,
+                            #   wheel_controller_spawner,
                               joint_broad_spawner])

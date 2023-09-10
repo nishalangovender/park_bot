@@ -16,7 +16,7 @@
     </xacro:unless>
 
     <!-- Sensors -->
-    <!-- <xacro:include filename="lidar.xacro" />
-    <xacro:include filename="camera.xacro" /> -->
+    <xacro:include filename="lidar.xacro" />
+    <!-- <xacro:include filename="camera.xacro" /> -->
 
 </robot>
