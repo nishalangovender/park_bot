@@ -53,12 +53,7 @@ def generate_launch_description():
         arguments=['/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan'],
         output='screen')
 
-    # Controller Spawner
-    fws_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["fws_controller"])
-    
+    # Controller Spawner    
     steering_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -68,16 +63,6 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["wheel_velocity_controller"])
-
-    steering_trajectory_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["steering_trajectory_controller"])
-    
-    wheel_trajectory_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["wheel_trajectory_controller"])
 
     joint_broad_spawner = Node(
         package="controller_manager",
@@ -109,11 +94,8 @@ def generate_launch_description():
                               launch_ignition,
                               ignition_spawn_entity,
                               bridge,
-                              # fws_controller_spawner,
                               steering_controller_spawner,
                               wheel_controller_spawner,
-                              # steering_trajectory_controller_spawner,
-                              # wheel_trajectory_controller_spawner,
                               joint_broad_spawner,
                               # steer
                               ])
