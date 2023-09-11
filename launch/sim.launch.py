@@ -35,7 +35,8 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             [os.path.join(get_package_share_directory('ros_ign_gazebo'),
                           'launch', 'ign_gazebo.launch.py')]),
-        launch_arguments=[('gz_args', [' -r src/park_bot/worlds/park.world'])])
+        launch_arguments=[('gz_args', [' -r empty.sdf'])])
+        # launch_arguments=[('gz_args', [' -r src/park_bot/worlds/park.world'])])
 
     # Spawn Robot in Gazebo
     ignition_spawn_entity = Node(
@@ -57,15 +58,26 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["fws_controller"])
-    # steering_controller_spawner = Node(
-    #     package="controller_manager",
-    #     executable="spawner",
-    #     arguments=["steering_position_controller"])
     
-    # wheel_controller_spawner = Node(
-    #     package="controller_manager",
-    #     executable="spawner",
-    #     arguments=["wheel_velocity_controller"])
+    steering_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["steering_position_controller"])
+    
+    wheel_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["wheel_velocity_controller"])
+
+    steering_trajectory_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["steering_trajectory_controller"])
+    
+    wheel_trajectory_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["wheel_trajectory_controller"])
 
     joint_broad_spawner = Node(
         package="controller_manager",
@@ -82,6 +94,13 @@ def generate_launch_description():
         'use_ros2_control',
         default_value='true',
         description='Use ros2_control if true')
+    
+    # Steering
+    steer = Node(
+        package='park_bot',
+        executable='steer.py',
+        output='screen',
+        arguments=["0.5"])
 
     # Launch
     return LaunchDescription([sim_time_args,
@@ -90,7 +109,11 @@ def generate_launch_description():
                               launch_ignition,
                               ignition_spawn_entity,
                               bridge,
-                              fws_controller_spawner,
-                            #   steering_controller_spawner,
-                            #   wheel_controller_spawner,
-                              joint_broad_spawner])
+                              # fws_controller_spawner,
+                              steering_controller_spawner,
+                              wheel_controller_spawner,
+                              # steering_trajectory_controller_spawner,
+                              # wheel_trajectory_controller_spawner,
+                              joint_broad_spawner,
+                              # steer
+                              ])

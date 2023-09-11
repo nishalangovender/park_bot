@@ -7,16 +7,16 @@
     <xacro:macro name="steering_link" params="prefix">
         <link name="${prefix}_steering_link">
             <visual name="">
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <cylinder radius="${steering_radius}" length="${steering_length}"/>
+                    <cylinder radius="${steering_radius}" length="${steering_length}" />
                 </geometry>
-                <material name="blue"/>
+                <material name="blue" />
             </visual>
             <collision>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <cylinder radius="${steering_radius}" length="${steering_length}"/>
+                    <cylinder radius="${steering_radius}" length="${steering_length}" />
                 </geometry>
             </collision>
             <xacro:inertial_cylinder mass="${steering_mass}" length="${steering_length}"
@@ -58,7 +58,7 @@
     <!-- Steering Joints -->
     <xacro:macro name="steering_joint" params="prefix front left">
         <joint name="${prefix}_steering_joint" type="revolute">
-            <origin xyz="${front*steering_offset_x} ${left*steering_offset_y} -${steering_offset_z}" 
+            <origin xyz="${front*steering_offset_x} ${left*steering_offset_y} -${steering_offset_z}"
                 rpy="${-1*left*pi/2} 0 0" />
             <parent link="chassis_link" />
             <child link="${prefix}_steering_link" />

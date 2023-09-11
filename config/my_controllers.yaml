@@ -9,11 +9,11 @@ controller_manager:
     fws_controller:
       type: fws_controller/FWSController
 
-    # steering_position_controller:
-    #   type: position_controllers/JointGroupPositionController
+    steering_position_controller:
+      type: position_controllers/JointGroupPositionController
 
-    # wheel_velocity_controller:
-    #   type: velocity_controllers/JointGroupVelocityController
+    wheel_velocity_controller:
+      type: velocity_controllers/JointGroupVelocityController
 
     steering_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
@@ -29,31 +29,31 @@ fws_controller:
       - rear_left_steering_joint
       - rear_right_steering_joint
 
-# steering_position_controller:
-#   ros__parameters:
-#     joints:
-#       - front_left_steering_joint
-#       - front_right_steering_joint
-#       - rear_left_steering_joint
-#       - rear_right_steering_joint
-#     command_interfaces:
-#       - position
-#     state_interfaces:
-#       - position
-#       - velocity
+steering_position_controller:
+  ros__parameters:
+    joints:
+      - front_left_steering_joint
+      - front_right_steering_joint
+      - rear_left_steering_joint
+      - rear_right_steering_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
 
-# wheel_velocity_controller:
-#   ros__parameters:
-#     joints:
-#       - front_left_wheel_joint
-#       - front_right_wheel_joint
-#       - rear_left_wheel_joint
-#       - rear_right_wheel_joint
-#     command_interfaces:
-#       - velocity
-#     state_interfaces:
-#       - position
-#       - velocity
+wheel_velocity_controller:
+  ros__parameters:
+    joints:
+      - front_left_wheel_joint
+      - front_right_wheel_joint
+      - rear_left_wheel_joint
+      - rear_right_wheel_joint
+    command_interfaces:
+      - velocity
+    state_interfaces:
+      - position
+      - velocity
 
 steering_trajectory_controller:
   ros__parameters:

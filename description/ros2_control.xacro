@@ -36,7 +36,7 @@
         <!-- Joint State Publisher -->
         <plugin filename="ign_ros2_control-system"
             name="ign_ros2_control::IgnitionROS2ControlPlugin">
-            <parameters>$(find park_bot)/config/my_controller.yaml</parameters>
+            <parameters>$(find park_bot)/config/my_controllers.yaml</parameters>
         </plugin>
     </gazebo>
 
