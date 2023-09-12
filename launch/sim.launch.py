@@ -68,6 +68,18 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster"])
+    
+    # Publisher Node
+    publisher = Node(
+        package='fws_publisher',
+        executable='publisher',
+        output='screen')
+    
+    # Joy
+    joystick = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [os.path.join(pkg_path, 'launch', 'joystick.launch.py')]),
+            launch_arguments={'use_sim_time': 'true'}.items())
 
     # Launch Arguments
     sim_time_args = DeclareLaunchArgument(
@@ -79,13 +91,7 @@ def generate_launch_description():
         'use_ros2_control',
         default_value='true',
         description='Use ros2_control if true')
-    
-    # Steering
-    steer = Node(
-        package='park_bot',
-        executable='steer.py',
-        output='screen',
-        arguments=["0.5"])
+
 
     # Launch
     return LaunchDescription([sim_time_args,
@@ -97,5 +103,5 @@ def generate_launch_description():
                               steering_controller_spawner,
                               wheel_controller_spawner,
                               joint_broad_spawner,
-                              # steer
-                              ])
+                              publisher,
+                              joystick])

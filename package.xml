@@ -11,6 +11,8 @@
 
   <build_depend>fws_controller</build_depend>
   <exec_depend>fws_controller</exec_depend>
+  <build_depend>fws_publisher</build_depend>
+  <exec_depend>fws_publisher</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
