@@ -9,7 +9,8 @@ teleop_node:
     axis_linear:
       # L UP/DOWN
       x: 1
-      y: 0
+      # ARROWS LEFT/RIGHT
+      y: 3
     scale_linear:
       x: 0.5
       y: 0.5
@@ -19,7 +20,7 @@ teleop_node:
 
     axis_angular:
       # R LEFT/RIGHT
-      yaw: 3
+      yaw: 0
     scale_angular:
       yaw: 0.5
     scale_angular_turbo:

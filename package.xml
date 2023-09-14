@@ -9,8 +9,6 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <build_depend>fws_controller</build_depend>
-  <exec_depend>fws_controller</exec_depend>
   <build_depend>fws_publisher</build_depend>
   <exec_depend>fws_publisher</exec_depend>
 

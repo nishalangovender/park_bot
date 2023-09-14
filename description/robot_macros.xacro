@@ -62,7 +62,7 @@
                 rpy="${-1*left*pi/2} 0 0" />
             <parent link="chassis_link" />
             <child link="${prefix}_steering_link" />
-            <axis xyz="0 ${left} 0" />
+            <axis xyz="0 ${-left} 0" />
             <limit lower="-${pi/4}" upper="${pi/4}" effort="100" velocity="1" />
         </joint>
     </xacro:macro>
