@@ -30,12 +30,13 @@
             radius="${laser_radius}">
             <origin xyz="0 0 0" rpy="0 0 0" />
         </xacro:inertial_cylinder>
+
     </link>
 
     <!-- Ignition Gazebo -->
     <gazebo reference="laser_frame">
         <material>Gazebo/Black</material>
-        <sensor name="laser" type="gpu_lidar">
+        <sensor name="laser_frame" type="gpu_lidar">
             <pose>0 0 0 0 0 0</pose>
             <topic>scan</topic>
             <visualize>true</visualize>
@@ -55,13 +56,7 @@
                     <resolution>0.01</resolution>
                 </range>
             </lidar>
-            <plugin filename="ignition-gazebo-sensors-system" name="gz::sim::systems::Sensors">
-                <!-- <ros>
-                    <argument>~/out:=scan</argument>
-                </ros>
-                <output_type>sensor_msgs/LaserScan</output_type>
-                <frame_name>laser_frame</frame_name> -->
-            </plugin>
+            <plugin filename="ignition-gazebo-sensors-system" name="gz::sim::systems::Sensors" />
         </sensor>
     </gazebo>
 

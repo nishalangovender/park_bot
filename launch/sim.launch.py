@@ -53,7 +53,7 @@ def generate_launch_description():
         package='ros_ign_bridge',
         executable='parameter_bridge',
         arguments=[
-            '/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan --ros-args -r /scan:=/laser_scan'],
+            '/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan --ros-args -r /scan:=/laser_scan'], # --ros-args -r /scan:=/laser_scan
         output='screen')
 
     # Controller Spawner
@@ -77,6 +77,12 @@ def generate_launch_description():
         package='fws_publisher',
         executable='publisher',
         output='screen')
+    
+    # Odometry
+    odometry = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [os.path.join(get_package_share_directory('rf2o_laser_odometry'),
+                          'launch', 'rf2o_laser_odometry.launch.py')]))
 
     # Joy
     joystick = IncludeLaunchDescription(
@@ -106,4 +112,5 @@ def generate_launch_description():
                               wheel_controller_spawner,
                               joint_broad_spawner,
                               publisher,
+                              odometry,
                               joystick])
