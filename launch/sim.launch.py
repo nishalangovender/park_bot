@@ -20,8 +20,10 @@ def generate_launch_description():
     pkg_name = 'park_bot'
     pkg_path = os.path.join(get_package_share_directory(pkg_name))
     xacro_file = os.path.join(pkg_path, 'description', 'robot.urdf.xacro')
-    robot_description_config = Command(['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control, ' sim_mode:=', use_sim_time])
-    params = {'robot_description': robot_description_config, 'use_sim_time': use_sim_time}
+    robot_description_config = Command(
+        ['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control, ' sim_mode:=', use_sim_time])
+    params = {'robot_description': robot_description_config,
+              'use_sim_time': use_sim_time}
 
     # Robot State Publisher Node
     node_robot_state_publisher = Node(
@@ -35,8 +37,8 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             [os.path.join(get_package_share_directory('ros_ign_gazebo'),
                           'launch', 'ign_gazebo.launch.py')]),
-        launch_arguments=[('gz_args', [' -r empty.sdf'])])
-        # launch_arguments=[('gz_args', [' -r src/park_bot/worlds/park.world'])])
+        # launch_arguments=[('gz_args', [' -r empty.sdf'])])
+        launch_arguments=[('gz_args', [' -r src/park_bot/worlds/park.world'])])
 
     # Spawn Robot in Gazebo
     ignition_spawn_entity = Node(
@@ -45,20 +47,21 @@ def generate_launch_description():
         arguments=['-topic', 'robot_description',
                    '-entity', 'my_bot'],
         output='screen')
-    
+
     # Bridge
     bridge = Node(
-        package='ros_gz_bridge',
+        package='ros_ign_bridge',
         executable='parameter_bridge',
-        arguments=['/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan'],
+        arguments=[
+            '/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan --ros-args -r /scan:=/laser_scan'],
         output='screen')
 
-    # Controller Spawner    
+    # Controller Spawner
     steering_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["steering_position_controller"])
-    
+
     wheel_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -68,18 +71,18 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster"])
-    
+
     # Publisher Node
     publisher = Node(
         package='fws_publisher',
         executable='publisher',
         output='screen')
-    
+
     # Joy
     joystick = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [os.path.join(pkg_path, 'launch', 'joystick.launch.py')]),
-            launch_arguments={'use_sim_time': 'true'}.items())
+        launch_arguments={'use_sim_time': 'true'}.items())
 
     # Launch Arguments
     sim_time_args = DeclareLaunchArgument(
@@ -91,7 +94,6 @@ def generate_launch_description():
         'use_ros2_control',
         default_value='true',
         description='Use ros2_control if true')
-
 
     # Launch
     return LaunchDescription([sim_time_args,

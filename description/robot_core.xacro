@@ -68,4 +68,21 @@
     <xacro:wheel_joint prefix="rear_left" left="1" />
     <xacro:wheel_joint prefix="rear_right" left="-1" />
 
+    <!-- <gazebo>
+        <plugin
+            filename="gz-sim-odometry-publisher-system"
+            name="gz::sim::systems::OdometryPublisher">
+            <odom_frame>odom</odom_frame>
+            <robot_base_frame>base_link</robot_base_frame>
+        </plugin>
+        <plugin
+            filename="gz-sim-pose-publisher-system"
+            name="gz::sim::systems::PosePublisher">
+            <publish_link_pose>true</publish_link_pose>
+            <use_pose_vector_msg>true</use_pose_vector_msg>
+            <static_publisher>true</static_publisher>
+            <static_update_frequency>1</static_update_frequency>
+        </plugin>
+    </gazebo> -->
+
 </robot>
