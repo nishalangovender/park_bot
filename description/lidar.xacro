@@ -36,11 +36,11 @@
     <!-- Ignition Gazebo -->
     <gazebo reference="laser_frame">
         <material>Gazebo/Black</material>
-        <sensor name="laser_frame" type="gpu_lidar">
+        <sensor name="laser" type="gpu_lidar">
             <pose>0 0 0 0 0 0</pose>
             <topic>scan</topic>
             <visualize>true</visualize>
-            <update_rate>10</update_rate>
+            <update_rate>20</update_rate>
             <lidar>
                 <scan>
                     <horizontal>

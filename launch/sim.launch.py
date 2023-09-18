@@ -88,12 +88,28 @@ def generate_launch_description():
     joystick = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [os.path.join(pkg_path, 'launch', 'joystick.launch.py')]),
-        launch_arguments={'use_sim_time': 'true'}.items())
+        launch_arguments={'use_sim_time': use_sim_time}.items())
+    
+    # Static Transform
+    static_tf = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        output='screen',
+        arguments=['--frame-id', 'laser_frame',
+                   '--child-frame-id','robot/base_link/laser'])
+    
+    # SLAM
+    slam = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [os.path.join(get_package_share_directory('slam_toolbox'),
+                          'launch', 'online_async_launch.py')]),
+        launch_arguments=[('slam_params_file', ['./src/park_bot/config/slam.yaml']),
+                          ('use_sim_time', use_sim_time)])
 
     # Launch Arguments
     sim_time_args = DeclareLaunchArgument(
         'use_sim_time',
-        default_value='false',
+        default_value='true',
         description='Use sim time if true')
 
     ros2_control_args = DeclareLaunchArgument(
@@ -113,4 +129,6 @@ def generate_launch_description():
                               joint_broad_spawner,
                               publisher,
                               odometry,
-                              joystick])
+                              joystick,
+                              static_tf,
+                              slam])
