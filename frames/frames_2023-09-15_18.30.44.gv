@@ -1,0 +1,17 @@
+digraph G {
+"odom" -> "base_link"[label=" Broadcaster: default_authority\nAverage rate: 370000.0\nBuffer length: 0.0\nMost recent transform: 44.0\nOldest transform: 44.0\n"];
+"chassis_link" -> "front_left_steering_link"[label=" Broadcaster: default_authority\nAverage rate: 20.278\nBuffer length: 3.6\nMost recent transform: 346.8\nOldest transform: 343.2\n"];
+"base_link" -> "chassis_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"front_left_steering_link" -> "front_left_wheel_link"[label=" Broadcaster: default_authority\nAverage rate: 20.278\nBuffer length: 3.6\nMost recent transform: 346.8\nOldest transform: 343.2\n"];
+"chassis_link" -> "front_right_steering_link"[label=" Broadcaster: default_authority\nAverage rate: 20.278\nBuffer length: 3.6\nMost recent transform: 346.8\nOldest transform: 343.2\n"];
+"front_right_steering_link" -> "front_right_wheel_link"[label=" Broadcaster: default_authority\nAverage rate: 20.278\nBuffer length: 3.6\nMost recent transform: 346.8\nOldest transform: 343.2\n"];
+"chassis_link" -> "rear_left_steering_link"[label=" Broadcaster: default_authority\nAverage rate: 20.278\nBuffer length: 3.6\nMost recent transform: 346.8\nOldest transform: 343.2\n"];
+"rear_left_steering_link" -> "rear_left_wheel_link"[label=" Broadcaster: default_authority\nAverage rate: 20.278\nBuffer length: 3.6\nMost recent transform: 346.8\nOldest transform: 343.2\n"];
+"chassis_link" -> "rear_right_steering_link"[label=" Broadcaster: default_authority\nAverage rate: 20.278\nBuffer length: 3.6\nMost recent transform: 346.8\nOldest transform: 343.2\n"];
+"rear_right_steering_link" -> "rear_right_wheel_link"[label=" Broadcaster: default_authority\nAverage rate: 20.278\nBuffer length: 3.6\nMost recent transform: 346.8\nOldest transform: 343.2\n"];
+"chassis_link" -> "laser_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1694795444.8184533"[ shape=plaintext ] ;
+}->"odom";
+}

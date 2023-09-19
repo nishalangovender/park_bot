@@ -37,7 +37,6 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             [os.path.join(get_package_share_directory('ros_ign_gazebo'),
                           'launch', 'ign_gazebo.launch.py')]),
-        # launch_arguments=[('gz_args', [' -r empty.sdf'])])
         launch_arguments=[('gz_args', [' -r src/park_bot/worlds/park.world'])])
 
     # Spawn Robot in Gazebo
@@ -53,7 +52,7 @@ def generate_launch_description():
         package='ros_ign_bridge',
         executable='parameter_bridge',
         arguments=[
-            '/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan --ros-args -r /scan:=/laser_scan'], # --ros-args -r /scan:=/laser_scan
+            '/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan --ros-args -r /scan:=/laser_scan'],
         output='screen')
 
     # Controller Spawner
