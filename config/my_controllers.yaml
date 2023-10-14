@@ -37,3 +37,5 @@ wheel_velocity_controller:
     state_interfaces:
       - position
       - velocity
+
+# type: effort_controllers/JointGroupEffortController

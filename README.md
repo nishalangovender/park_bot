@@ -1,6 +1,6 @@
-## Autonomous Parking of a 4WS Vehicle
+# Autonomous Parking of a 4WS Vehicle
 
-# Description
+## Description
 
 Implemention and testing of the simulation for my final-year mechatronic project "Autonomous Parking of a 4WS Vehicle".
 
@@ -9,18 +9,18 @@ This project follows the Mechanical and Mechatronic Engineering Department modul
 Student: Nishalan Govender <br/>
 Supervisor: Prof J Engelbrecht
 
-## Setup
+# Setup
 
 Software:
 - ROS2 Humble
-- Ignitioon Gazebo (Fortress)
+- Ignition Gazebo (Fortress)
 - Ubuntu 22.04 LTS
 - Parallels VM (virtual machine)
 
 Hardware:
 - ARM64 (MacBook Pro M1)
 
-# Packages
+## Packages
 
 Required packages include:
 - ros-humble-desktop
@@ -33,7 +33,7 @@ Required packages include:
 Helpful:
 - ros-humble-ign-ros2-control-demos
 
-# Instructions
+## Instructions
 
 1. Make directory from ${HOME} <br/>
    `mkdir -p ros2_ws/dev_ws/src`
@@ -50,25 +50,26 @@ Helpful:
 6. Source environment variable <br/>
    `source install/setup.bash`
 
-## Methodology
+# Methodology
 
-# Robot State Publisher
+## Robot State Publisher
 
 1. Test `robot_state_publisher` with launch file <br/>
    Terminal 1: `ros2 launch park_bot rsp.launch.py` <br/>
    Terminal 2: `ros2 run joint_state_publisher_gui joint_state_publisher_gui` <br/>
    Terminal 3: `rviz2 -d view_bot.rviz`
 
-# Ignition Gazebo
+## Ignition Gazebo
 
 2. Test Ignition Gazebo Spawn with launch file <br/>
    `ros2 launch park_bot rsp_sim.launch.py`
 
-# Simulation
+## Simulation
 
 3. Test full simulation in Ignition Gazebo, using ROS2 Control, SLAM and NAV2 with launch file <br/>
-   Terminal 1: `ros2 launch park_bot sim.launch.py`
-   Terminal 2: `rviz2 -d src/park_bot/config/main.rviz`
+   Terminal 1: `ros2 launch park_bot sim.launch.py` <br/>
+   Terminal 2: `rviz2 -d src/park_bot/config/main.rviz` <br/>
+   Terimnal 3: `ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true`
 
 4. Set `Goal Pose` and watch the park_bot move!
 
