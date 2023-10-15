@@ -76,6 +76,12 @@ def generate_launch_description():
         package='fws_publisher',
         executable='publisher',
         output='screen')
+
+    # Action Node
+    action = Node(
+        package='fws_controller',
+        executable='fws_controller',
+        output='screen')
     
     # Odometry
     odometry = IncludeLaunchDescription(
@@ -126,8 +132,9 @@ def generate_launch_description():
                               steering_controller_spawner,
                               wheel_controller_spawner,
                               joint_broad_spawner,
-                              publisher,
-                              odometry,
-                              joystick,
-                              static_tf,
-                              slam])
+                              action,])
+                            #   publisher,])
+                            #   odometry,
+                            #   joystick,
+                            #   static_tf,
+                            #   slam])
