@@ -78,7 +78,7 @@ def generate_launch_description():
         output='screen')
 
     # Action Node
-    action = Node(
+    kinematics = Node(
         package='fws_controller',
         executable='fws_controller',
         output='screen')
@@ -132,8 +132,8 @@ def generate_launch_description():
                               steering_controller_spawner,
                               wheel_controller_spawner,
                               joint_broad_spawner,
-                              action,])
-                            #   publisher,])
+                              kinematics,])
+                              # publisher,
                             #   odometry,
                             #   joystick,
                             #   static_tf,

@@ -1,7 +1,7 @@
 controller_manager:
   ros__parameters:
     use_sim_time: true
-    update_rate: 20  # Hz
+    update_rate: 50  # Hz
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -24,8 +24,11 @@ steering_position_controller:
     state_interfaces:
       - position
       - velocity
-    open_loop_control: true
-
+    # gains:
+    #   front_left_steering_joint: {p: 0.5, i: 1.0, d: 1.0, i_clamp: 0.0}
+    #   front_right_steering_joint: {p: 0.5, i: 1.0, d: 1.0, i_clamp: 0.0}
+    #   rear_left_steering_joint: {p: 0.5, i: 1.0, d: 1.0, i_clamp: 0.0}
+    #   rear_right_steering_joint: {p: 0.5, i: 1.0, d: 1.0, i_clamp: 0.0}
 
 wheel_velocity_controller:
   ros__parameters:

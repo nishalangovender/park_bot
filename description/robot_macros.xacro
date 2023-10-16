@@ -63,7 +63,7 @@
             <parent link="chassis_link" />
             <child link="${prefix}_steering_link" />
             <axis xyz="0 ${-left} 0" />
-            <limit lower="-${pi/4}" upper="${pi/4}" effort="100" velocity="1" />
+            <limit lower="-${pi/4}" upper="${pi/4}" effort="100" velocity="100" />
         </joint>
     </xacro:macro>
 
