@@ -1,7 +1,7 @@
 controller_manager:
   ros__parameters:
     use_sim_time: true
-    update_rate: 50  # Hz
+    update_rate: 100  # Hz
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -24,11 +24,12 @@ steering_position_controller:
     state_interfaces:
       - position
       - velocity
+    # open_loop_control: false
     # gains:
-    #   front_left_steering_joint: {p: 0.5, i: 1.0, d: 1.0, i_clamp: 0.0}
-    #   front_right_steering_joint: {p: 0.5, i: 1.0, d: 1.0, i_clamp: 0.0}
-    #   rear_left_steering_joint: {p: 0.5, i: 1.0, d: 1.0, i_clamp: 0.0}
-    #   rear_right_steering_joint: {p: 0.5, i: 1.0, d: 1.0, i_clamp: 0.0}
+    #   front_left_steering_joint: {p: 1.0, d:0.0, i: 0.0, i_clamp: 0.0}
+    #   front_right_steering_joint: {p: 1.0, d:0.0, i: 0.0, i_clamp: 0.0}
+    #   rear_left_steering_joint: {p: 1.0, d:0.0, i: 0.0, i_clamp: 0.0}
+    #   rear_right_steering_joint: {p: 1.0, d:0.0, i: 0.0, i_clamp: 0.0}
 
 wheel_velocity_controller:
   ros__parameters:
@@ -43,6 +44,11 @@ wheel_velocity_controller:
       - position
       - velocity
     open_loop_control: true
+    # gains:
+    #   front_left_wheel_joint: {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0}
+    #   front_right_wheel_joint: {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0}
+    #   rear_left_wheel_joint: {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0}
+    #   rear_right_wheel_joint: {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0}
 
 # type: effort_controllers/JointGroupEffortController
 # type: position_controllers/JointGroupPositionController

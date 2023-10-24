@@ -68,6 +68,15 @@
     <xacro:wheel_joint prefix="rear_left" left="1" />
     <xacro:wheel_joint prefix="rear_right" left="-1" />
 
+    <!-- ================================ Gazebo ================================ -->
+
+    <gazebo>
+        <plugin filename="ignition-gazebo-odometry-publisher-system" name="ignition::gazebo::systems::OdometryPublisher">
+            <odom_frame>odom</odom_frame>
+            <robot_base_frame>robot/base_link</robot_base_frame>
+        </plugin>
+    </gazebo>
+
     <!-- <gazebo>
         <plugin
             filename="gz-sim-odometry-publisher-system"

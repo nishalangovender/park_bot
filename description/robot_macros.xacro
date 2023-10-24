@@ -26,6 +26,8 @@
         </link>
         <gazebo reference="${prefix}_steering">
             <material>Gazebo/Blue</material>
+            <mu1 value="0.5" />
+            <mu2 value="0.5" />
         </gazebo>
     </xacro:macro>
 
@@ -52,6 +54,8 @@
         </link>
         <gazebo reference="${prefix}_wheel">
             <material>Gazebo/Blue</material>
+            <mu1 value="1.0" />
+            <mu2 value="1.0" />
         </gazebo>
     </xacro:macro>
 
@@ -63,7 +67,7 @@
             <parent link="chassis_link" />
             <child link="${prefix}_steering_link" />
             <axis xyz="0 ${-left} 0" />
-            <limit lower="-${pi/4}" upper="${pi/4}" effort="100" velocity="100" />
+            <limit lower="-${pi/4}" upper="${pi/4}" effort="1" velocity="100" />
         </joint>
     </xacro:macro>
 
@@ -79,3 +83,25 @@
     </xacro:macro>
 
 </robot>
+
+                <!-- <surface>
+                    <friction>
+                        <ode>
+                            <mu>50.000000</mu>
+                            <mu2>50.000000</mu2>
+                            <fdir1>0.000000 0.000000 0.000000</fdir1>
+                            <slip1>0.000000</slip1>
+                            <slip2>0.000000</slip2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <ode>
+                            <soft_cfm>0.000000</soft_cfm>
+                            <soft_erp>0.200000</soft_erp>
+                            <kp>1000000000.000000</kp>
+                            <kd>1.000000</kd>
+                            <max_vel>100.000000</max_vel>
+                            <min_depth>0.001000</min_depth>
+                        </ode>
+                    </contact>
+                </surface> -->

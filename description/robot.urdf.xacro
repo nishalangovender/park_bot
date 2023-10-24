@@ -11,9 +11,6 @@
     <xacro:if value="$(arg use_ros2_control)">
         <xacro:include filename="ros2_control.xacro" />
     </xacro:if>
-    <xacro:unless value="$(arg use_ros2_control)">
-        <xacro:include filename="gz_control.xacro" />
-    </xacro:unless>
 
     <!-- Sensors -->
     <xacro:include filename="lidar.xacro" />

@@ -38,7 +38,6 @@ def generate_launch_description():
             [os.path.join(get_package_share_directory('ros_ign_gazebo'),
                           'launch', 'ign_gazebo.launch.py')]),
         launch_arguments=[('gz_args', [' -r empty.sdf'])])
-        # launch_arguments=[('gz_args', [' -r src/park_bot/worlds/park.world'])])
 
     # Spawn Robot in Gazebo
     ignition_spawn_entity = Node(
@@ -52,13 +51,6 @@ def generate_launch_description():
         output='screen')
 
     # Bridge
-    laser_bridge = Node(
-        package='ros_ign_bridge',
-        executable='parameter_bridge',
-        arguments=[
-            '/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan --ros-args -r /scan:=/laser_scan'],
-        output='screen')
-    
     pose_bridge = Node(
         package='ros_ign_bridge',
         executable='parameter_bridge',
@@ -90,44 +82,23 @@ def generate_launch_description():
         arguments=["joint_state_broadcaster"])
 
     # Publisher Node
-    publisher = Node(
-        package='fws_publisher',
-        executable='publisher',
-        output='screen')
+    # publisher = Node(
+    #     package='fws_publisher',
+    #     executable='publisher',
+    #     output='screen')
 
     # Action Node
-    kinematics = Node(
+    inverse_kinematics = Node(
         package='fws_controller',
         executable='fws_controller',
-        output='screen')
-    
-    # Odometry
-    odometry = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            [os.path.join(get_package_share_directory('rf2o_laser_odometry'),
-                          'launch', 'rf2o_laser_odometry.launch.py')]))
+        output='screen',
+        parameters=[{'use_sim_time': use_sim_time}])
 
     # Joy
     joystick = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [os.path.join(pkg_path, 'launch', 'joystick.launch.py')]),
         launch_arguments={'use_sim_time': use_sim_time}.items())
-    
-    # Static Transform
-    static_tf = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        output='screen',
-        arguments=['--frame-id', 'laser_frame',
-                   '--child-frame-id','robot/base_link/laser'])
-    
-    # SLAM
-    slam = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            [os.path.join(get_package_share_directory('slam_toolbox'),
-                          'launch', 'online_async_launch.py')]),
-        launch_arguments=[('slam_params_file', ['./src/park_bot/config/slam.yaml']),
-                          ('use_sim_time', use_sim_time)])
 
     # Launch Arguments
     sim_time_args = DeclareLaunchArgument(
@@ -146,15 +117,10 @@ def generate_launch_description():
                               node_robot_state_publisher,
                               launch_ignition,
                               ignition_spawn_entity,
-                              laser_bridge,
                               pose_bridge,
                               odom_bridge,
                               steering_controller_spawner,
                               wheel_controller_spawner,
                               joint_broad_spawner,
-                              kinematics,])
-                              # publisher,
-                            #   odometry,
-                            #   joystick,
-                            #   static_tf,
-                            #   slam])
+                              inverse_kinematics,
+                              joystick])
