@@ -44,7 +44,7 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <cylinder radius="${wheel_radius}" length="${wheel_thickness}" />
+                    <sphere radius="${wheel_radius}" />
                 </geometry>
             </collision>
             <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_thickness}"
@@ -52,10 +52,10 @@
                 <origin xyz="0 0 0" rpy="0 0 0" />
             </xacro:inertial_cylinder>
         </link>
-        <gazebo reference="${prefix}_wheel">
+        <gazebo reference="${prefix}_wheel_link">
             <material>Gazebo/Blue</material>
-            <mu1 value="1.0" />
-            <mu2 value="1.0" />
+            <mu1 value="0.001"/>
+            <mu2 value="0.001" />
         </gazebo>
     </xacro:macro>
 
@@ -84,7 +84,7 @@
 
 </robot>
 
-                <!-- <surface>
+<!-- <surface>
                     <friction>
                         <ode>
                             <mu>50.000000</mu>
