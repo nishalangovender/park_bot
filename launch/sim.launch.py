@@ -37,7 +37,6 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             [os.path.join(get_package_share_directory('ros_ign_gazebo'),
                           'launch', 'ign_gazebo.launch.py')]),
-        # launch_arguments=[('gz_args', [' -r empty.sdf'])])
         launch_arguments=[('gz_args', [' -r src/park_bot/worlds/park.sdf'])])
 
     # Spawn Robot in Gazebo
@@ -106,7 +105,8 @@ def generate_launch_description():
     odometry = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [os.path.join(get_package_share_directory('rf2o_laser_odometry'),
-                          'launch', 'rf2o_laser_odometry.launch.py')]))
+                          'launch', 'rf2o_laser_odometry.launch.py')]),
+        launch_arguments={'use_sim_time': use_sim_time}.items())
 
     # Joy
     joystick = IncludeLaunchDescription(
@@ -120,7 +120,8 @@ def generate_launch_description():
         executable='static_transform_publisher',
         output='screen',
         arguments=['--frame-id', 'laser_frame',
-                   '--child-frame-id','robot/base_link/laser'])
+                   '--child-frame-id','robot/base_link/laser'],
+        parameters=[{'use_sim_time': use_sim_time}])
     
     # SLAM
     slam = IncludeLaunchDescription(
@@ -129,6 +130,14 @@ def generate_launch_description():
                           'launch', 'online_async_launch.py')]),
         launch_arguments=[('slam_params_file', ['./src/park_bot/config/slam.yaml']),
                           ('use_sim_time', use_sim_time)])
+    
+    # Navigation
+    nav = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [os.path.join(get_package_share_directory('nav2_bringup'),
+                          'launch', 'bringup_launch.py')]),
+        launch_arguments=[('map', ['./park_map_save.yaml']),
+                          ('params_file', ['./src/park_bot/config/nav.yaml'])])
 
     # Launch Arguments
     sim_time_args = DeclareLaunchArgument(
@@ -157,4 +166,5 @@ def generate_launch_description():
                               odometry,
                               joystick,
                               static_tf,
-                              slam])
+                              slam,
+                              nav])

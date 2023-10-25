@@ -1,769 +1,797 @@
-<sdf version='1.9'>
-  <world name='empty'>
-    <physics name='1ms' type='ignored'>
+<sdf version="1.6">
+  <world name="empty">
+    <physics name="1ms" type="ignored">
       <max_step_size>0.001</max_step_size>
-      <real_time_factor>1</real_time_factor>
-      <real_time_update_rate>1000</real_time_update_rate>
+      <real_time_factor>1.0</real_time_factor>
     </physics>
-    <plugin name='gz::sim::systems::Physics' filename='ignition-gazebo-physics-system'/>
-    <plugin name='gz::sim::systems::UserCommands' filename='ignition-gazebo-user-commands-system'/>
-    <plugin name='gz::sim::systems::SceneBroadcaster' filename='ignition-gazebo-scene-broadcaster-system'/>
-    <plugin name='gz::sim::systems::Contact' filename='ignition-gazebo-contact-system'/>
-    <gravity>0 0 -9.8</gravity>
-    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
-    <atmosphere type='adiabatic'/>
-    <scene>
-      <ambient>0.4 0.4 0.4 1</ambient>
-      <background>0.7 0.7 0.7 1</background>
-      <shadows>true</shadows>
-    </scene>
-    <model name='ground_plane'>
+    <plugin filename="ignition-gazebo-physics-system" name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin filename="ignition-gazebo-user-commands-system" name="gz::sim::systems::UserCommands">
+    </plugin>
+    <plugin filename="ignition-gazebo-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+    <plugin filename="ignition-gazebo-contact-system" name="gz::sim::systems::Contact">
+    </plugin>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
       <static>true</static>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>100 100</size>
-            </plane>
-          </geometry>
-          <surface>
-            <friction>
-              <ode/>
-            </friction>
-            <bounce/>
-            <contact/>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>100 100</size>
-            </plane>
-          </geometry>
-          <material>
-            <ambient>0.8 0.8 0.8 1</ambient>
-            <diffuse>0.8 0.8 0.8 1</diffuse>
-            <specular>0.8 0.8 0.8 1</specular>
-          </material>
-        </visual>
-        <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+      <link name="link">
+      <collision name="collision">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>100 100</size>
+          </plane>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>100 100</size>
+          </plane>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.8 0.8 0.8 1</specular>
+        </material>
+      </visual>
       </link>
-      <pose>0 0 0 0 -0 0</pose>
-      <self_collide>false</self_collide>
     </model>
+
     <model name='Wall 1'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>4.99483 0.002525 0.5 0.424752 -1.57079 -0.431561</pose>
+      <pose>4.99486 0.003101 0.499998 -0.113583 -1.57079 0.107886</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 2'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>5.02566 -1.00215 0.5 -1.4513 -1.5708 1.45404</pose>
+      <pose>5.0263 -1.00121 0.500026 -0.024051 -1.57074 0.027201</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 3'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>4.9994 -2.00274 0.499999 -3.04107 -1.57079 3.04325</pose>
+      <pose>5.00078 -2.00212 0.500003 -2.98645 -1.57078 2.99127</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 4'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>5.00132 -3.00274 0.5 -0.777721 -1.5708 0.77991</pose>
+      <pose>5.00274 -3.00215 0.500003 -0.023333 -1.57079 0.028187</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 5'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>5.00035 1.00592 0.5 -1.95286 -1.57079 1.95286</pose>
+      <pose>5.00036 1.00593 0.5 -2.60398 -1.5708 2.60399</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 6'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>5.00056 2.00597 0.5 -2.68952 -1.57079 2.68957</pose>
+      <pose>5.00056 2.00597 0.5 -0.755792 -1.5708 0.755839</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 7'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>5 3.00597 0.5 0.103126 -1.5708 -0.103073</pose>
+      <pose>5 3.00597 0.5 -2.44482 -1.5708 2.44486</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 8'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>5.00091 4.00602 0.5 -2.84333 -1.5708 2.84346</pose>
+      <pose>5.00091 4.00602 0.5 -0.420716 -1.5708 0.420846</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 9'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>5.00094 -4.00275 0.5 -1.76652 -1.5708 1.76871</pose>
+      <pose>5.00698 -4.00214 0.500006 -3.07488 -1.57078 3.07974</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 10'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>5.00062 5.00602 0.499999 -2.38447 -1.5708 2.38461</pose>
+      <pose>5.00049 5.00629 0.5 -1.50679 -1.5708 1.5065</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 11'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>5.00068 -5.00409 0.5 -2.73692 -1.57079 2.73662</pose>
+      <pose>5.01041 -5.00474 0.500716 -0.054206 -1.56941 0.054238</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 12'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>4.00068 -5.00323 0.5 1.43925 -1.5708 -1.43954</pose>
+      <pose>4.00955 -5.00468 0.503014 0.743595 -1.56663 -0.74351</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 13'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>3.00061 -4.99941 0.5 -1.50917 -1.5708 1.50873</pose>
+      <pose>3.00916 -5.00041 0.506405 -0.902356 -1.56662 0.902754</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 14'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>2.0006 -5.00066 0.5 -0.068612 -1.57079 0.068157</pose>
+      <pose>2.0009 -4.99528 0.514272 -0.698262 -1.55578 0.694226</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 15'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>1.00035 -4.99988 0.5 0.898479 -1.57079 -0.898479</pose>
+      <pose>0.996704 -4.99116 0.512405 -0.713787 -1.55685 0.703464</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 16'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>4.00045 5.00011 0.5 -1.57075 -1.5708 1.57056</pose>
+      <pose>4.00048 5.0001 0.5 1.56048 -1.57079 -1.56075</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 17'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>3.00043 4.9991 0.499999 -2.02484 -1.57079 2.0247</pose>
+      <pose>3.00048 4.99809 0.5 -1.57048 -1.57079 1.57021</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 18'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>2.00043 5.00024 0.499999 1.57077 -1.5708 -1.57092</pose>
+      <pose>2.00042 5.00028 0.5 -1.58345 -1.5708 1.58329</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Wall 19'>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box 3x1x3/2/meshes/simple_box.dae</uri>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/brick box
+              3x1x3/2/meshes/simple_box.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>1.0004 4.99978 0.5 1.57333 -1.5708 -1.57343</pose>
+      <pose>1.00041 4.99976 0.5 -1.58587 -1.5708 1.58574</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
     <model name='Parking Line 1'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
       <pose>2 4 0 0 -0 0</pose>
       <self_collide>false</self_collide>
@@ -771,184 +799,194 @@
     <model name='Parking Line 2'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>4 1 0 0 -0 1.57</pose>
+      <pose>4 1 0 0 -0 1</pose>
       <self_collide>false</self_collide>
     </model>
     <model name='Parking Line 3'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>4 -1 0 0 -0 1.57</pose>
+      <pose>4 -1 0 0 -0 1</pose>
       <self_collide>false</self_collide>
     </model>
     <model name='Parking Line 4'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>4 0 0 0 -0 1.57</pose>
+      <pose>4 0 0 0 -0 1</pose>
       <self_collide>false</self_collide>
     </model>
     <model name='Parking Line 5'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.25 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.25 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>1.5 -4 0 0 -0 0</pose>
+      <pose>2.5 -4.5 0 0 -0 0</pose>
       <self_collide>false</self_collide>
     </model>
     <model name='Parking Line 6'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
       <pose>1.5 4 0 0 -0 0</pose>
       <self_collide>false</self_collide>
@@ -956,147 +994,155 @@
     <model name='Parking Line 7'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.25 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.25 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>3 -4 0 0 -0 0</pose>
+      <pose>3 -4.5 0 0 -0 0</pose>
       <self_collide>false</self_collide>
     </model>
     <model name='Parking Line 8'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.25 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.25 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>2.5 -4 0 0 -0 0</pose>
+      <pose>1.5 -4.5 0 0 -0 0</pose>
       <self_collide>false</self_collide>
     </model>
     <model name='Parking Line 9'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.25 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.25 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>2 -4 0 0 -0 0</pose>
+      <pose>2 -4.5 0 0 -0 0</pose>
       <self_collide>false</self_collide>
     </model>
     <model name='Parking Line 10'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
       <pose>3 4 0 0 -0 0</pose>
       <self_collide>false</self_collide>
@@ -1104,36 +1150,38 @@
     <model name='Parking Line 11'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
       <pose>2.5 4 0 0 -0 0</pose>
       <self_collide>false</self_collide>
@@ -1141,95 +1189,744 @@
     <model name='Parking Line 12'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>4 2 0 0 -0 1.57</pose>
+      <pose>4 2 0 0 -0 1</pose>
       <self_collide>false</self_collide>
     </model>
     <model name='Parking Line 13'>
       <static>true</static>
       <link name='link'>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking block/2/files/meshes/block.dae</uri>
-              <scale>0.5 0.5 0.5</scale>
-            </mesh>
-          </geometry>
-        </collision>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
         <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
       </link>
-      <pose>4 -2 0 0 -0 1.57</pose>
+      <pose>4 -2 0 0 -0 1</pose>
       <self_collide>false</self_collide>
     </model>
-    <light name='sun' type='directional'>
-      <pose>0 0 10 0 -0 0</pose>
-      <cast_shadows>true</cast_shadows>
-      <intensity>1</intensity>
-      <direction>-0.5 0.1 -0.9</direction>
-      <diffuse>0.8 0.8 0.8 1</diffuse>
-      <specular>0.2 0.2 0.2 1</specular>
-      <attenuation>
-        <range>1000</range>
-        <linear>0.01</linear>
-        <constant>0.90000000000000002</constant>
-        <quadratic>0.001</quadratic>
-      </attenuation>
-      <spot>
-        <inner_angle>0</inner_angle>
-        <outer_angle>0</outer_angle>
-        <falloff>0</falloff>
-      </spot>
-    </light>
+    <model name='construction_cone_5'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>1.49256 3.47733 -0 -0 0 -0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_6'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>1.98931 3.48273 0 0 -0 -0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_9_2'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>1.27695 3.24365 -0 -0 0 0.043883</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_9_3'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>0.957721 3.18367 -0 0 -0 0.03968</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_9_4'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>1.95602 3.19097 -0 -0 0 0.033994</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_9_5'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>1.71136 2.91715 -0 -0 -0 0.029619</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_9_6'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>1.40215 2.7168 -0 -0 0 0.02623</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_9_7'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>1.05223 2.62392 -0 -0 1e-06 0.023183</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='Parking Line 10_1'>
+      <static>true</static>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/drc practice: yellow parking
+              block/2/files/meshes/block.dae</uri>
+            <scale>0.5 0.5 0.5</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>1 4 0 0 -0 1.57</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_10_1'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>3.24866 3.50089 -0 -0 0 -0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_10_2'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>3.43018 3.29077 -0 -0 0 -0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_10_3'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>3.52019 2.99289 -0 -0 0 -0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_10_4'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>3.57369 2.64031 -0 -0 0 -0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_10_4_1_1'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>3.37674 -1.85214 -0 -0 0 -0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_10_4_1_2'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>3.15987 -2.03499 -0 -0 0 -0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_10_4_1_3'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>3.01711 -2.33966 -0 -0 0 -0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='construction_cone_10_4_1_4'>
+      <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <mesh>
+            <uri>file:///home/nishalangovender/.ignition/fuel/fuel.gazebosim.org/openrobotics/models/construction
+              cone/2/meshes/construction_cone.dae</uri>
+            <scale>1.8 1.8 1.8</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <enable_wind>false</enable_wind>
+      </link>
+      <pose>3.01837 -2.77058 -0 -0 0 -0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+
   </world>
 </sdf>

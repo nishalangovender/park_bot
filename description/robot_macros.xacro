@@ -53,7 +53,7 @@
         <gazebo reference="${prefix}_wheel_link">
             <material>Gazebo/Blue</material>
             <mu1>1.0</mu1>
-            <mu2>0.01</mu2>
+            <mu2>0.1</mu2>
             <fdir1>0 0 1</fdir1>
         </gazebo>
     </xacro:macro>
