@@ -37,8 +37,8 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             [os.path.join(get_package_share_directory('ros_ign_gazebo'),
                           'launch', 'ign_gazebo.launch.py')]),
-        launch_arguments=[('gz_args', [' -r empty.sdf'])])
-        # launch_arguments=[('gz_args', [' -r src/park_bot/worlds/park.world'])])
+        # launch_arguments=[('gz_args', [' -r empty.sdf'])])
+        launch_arguments=[('gz_args', [' -r src/park_bot/worlds/park.sdf'])])
 
     # Spawn Robot in Gazebo
     ignition_spawn_entity = Node(
@@ -90,16 +90,17 @@ def generate_launch_description():
         arguments=["joint_state_broadcaster"])
 
     # Publisher Node
-    publisher = Node(
-        package='fws_publisher',
-        executable='publisher',
-        output='screen')
+    # publisher = Node(
+    #     package='fws_publisher',
+    #     executable='publisher',
+    #     output='screen')
 
     # Action Node
-    kinematics = Node(
+    inverse_kinematics = Node(
         package='fws_controller',
         executable='fws_controller',
-        output='screen')
+        output='screen',
+        parameters=[{'use_sim_time': use_sim_time}])
     
     # Odometry
     odometry = IncludeLaunchDescription(
@@ -152,9 +153,8 @@ def generate_launch_description():
                               steering_controller_spawner,
                               wheel_controller_spawner,
                               joint_broad_spawner,
-                              kinematics,])
-                              # publisher,
-                            #   odometry,
-                            #   joystick,
-                            #   static_tf,
-                            #   slam])
+                              inverse_kinematics,
+                              odometry,
+                              joystick,
+                              static_tf,
+                              slam])

@@ -1,98 +1,16 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <sdf version="1.5">
   <world name="park_world">
 
-    <!-- Global Light Source -->
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
-    </include>
-
-    <!-- Ground Plane -->
-    <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Ground Plane</uri>
-    </include>
-
-    <!-- Pavement Plane -->
-<!--     <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Pavement Plane</uri>
+    <!-- Person -->
+    <!-- <include>
+      <uri>
+        https://fuel.gazebosim.org/1.0/OpenRobotics/models/Walking person
+      </uri>
     </include> -->
-
-    <!-- Asphalt Plane -->
-<!--     <include>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Asphalt Plane</uri>
-    </include> -->
-
-    <!-- Wall -->
-    <include>
-      <name>Brick Wall 1</name>
-      <pose>-3 -5 0 0 0 0</pose>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-    </include>
-    <include>
-      <name>Brick Wall 2</name>
-      <pose>0 -5 0 0 0 0</pose>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-      <material>
-        <ambient>0.5 0.5 0.5 1</ambient>
-        <diffuse>0.5 0.5 0.5 1</diffuse>
-        <specular>0.1 0.1 0.1 1</specular>
-        <emissive>0 0 0 0</emissive>
-      </material>
-    </include>
-    <include>
-      <name>Brick Wall 3</name>
-      <pose>3 -5 0 0 0 0</pose>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-    </include>
-    <include>
-      <name>Brick Wall 4</name>
-      <pose>-3 5 0 0 0 0</pose>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-    </include>
-    <include>
-      <name>Brick Wall 5</name>
-      <pose>0 5 0 0 0 0</pose>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-    </include>
-    <include>
-      <name>Brick Wall 6</name>
-      <pose>3 5 0 0 0 0</pose>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-    </include>
-
-    <include>
-      <name>Brick Wall 7</name>
-      <pose>-5 -3 0 0 0 1.5708</pose>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-    </include>
-    <include>
-      <name>Brick Wall 8</name>
-      <pose>-5 0 0 0 0 1.5708</pose>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-    </include>
-    <include>
-      <name>Brick Wall 9</name>
-      <pose>-5 3 0 0 0 1.5708</pose>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-    </include>
-    <include>
-      <name>Brick Wall 10</name>
-      <pose>5 -3 0 0 0 1.5708</pose>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-    </include>
-    <include>
-      <name>Brick Wall 11</name>
-      <pose>5 0 0 0 0 1.5708</pose>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-    </include>
-    <include>
-      <name>Brick Wall 12</name>
-      <pose>5 3 0 0 0 1.5708</pose>
-      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Brick Box 3x1x3</uri>
-    </include>
 
     <!-- Parking Line -->
-    <!-- <include>
+    <include>
       <name>Parking Line 1</name>
       <pose>1 2 0 0 0 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/DRC Practice: Yellow parking block</uri>
@@ -111,19 +29,8 @@
       <name>Parking Line 4</name>
       <pose>4 2 0 0 0 0</pose>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/DRC Practice: Yellow parking block</uri>
-    </include> -->
+    </include>
 
-    <!-- Construction Cone -->
-    <include>
-      <name>Cone 1</name>
-      <pose>1.5 2 0 0 0 0</pose>
-      <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Cone</uri>
-    </include>
-    <include>
-      <name>Cone 2</name>
-      <pose>3.5 2 0 0 0 0</pose>
-      <uri>https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Construction Cone</uri>
-    </include>
 
   </world>
 </sdf>
