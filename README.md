@@ -1,79 +1,115 @@
-# Autonomous Parking of a 4WS Vehicle
+# park_bot
 
-## Description
+[![CI](https://github.com/nishalangovender/park_bot/actions/workflows/ci.yml/badge.svg)](https://github.com/nishalangovender/park_bot/actions/workflows/ci.yml)
+![ROS 2 Humble](https://img.shields.io/badge/ROS%202-Humble-blue)
+![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-Implemention and testing of the simulation for my final-year mechatronic project "Autonomous Parking of a 4WS Vehicle".
+Autonomous parking of a **four-wheel steering (4WS)** vehicle in ROS2 + Ignition Gazebo.
 
-This project follows the Mechanical and Mechatronic Engineering Department module Mechatronics Project 488 at Stellenbosch University.
+Started life as my Mechatronics Project 488 final-year thesis at Stellenbosch University under Prof J Engelbrecht (Cum Laude, 2022), and has since been polished into a senior-engineer-shape open-source package: CI, unit tests against a documented kinematic reference, one-shot build and run scripts, and a headless Docker build for reproducibility. The as-submitted thesis snapshot is preserved on the [`thesis`](https://github.com/nishalangovender/park_bot/tree/thesis) branch.
 
-Student: Nishalan Govender <br/>
-Supervisor: Prof J Engelbrecht
+A live TypeScript re-implementation of the kinematics and four showcase scenarios is at **[nishalangovender.com/projects/park-bot/demo](https://nishalangovender.com/projects/park-bot/demo)**.
 
-# Setup
+## Architecture
 
-Software:
-- ROS2 Humble
-- Ignition Gazebo (Fortress)
-- Ubuntu 22.04 LTS
-- Parallels VM (virtual machine)
+![Architecture](docs/architecture.svg)
 
-Hardware:
-- ARM64 (MacBook Pro M1)
+Stack:
 
-## Packages
+- **Simulation** — Ignition Gazebo (Fortress) driving a URDF 4WS chassis.
+- **Control bridge** — `ros2_control` with a position-controlled steering group and a velocity-controlled wheel group.
+- **Kinematics** — `park_bot.kinematics` — pure-Python module implementing the four 4WS modes (see `docs/kinematics.md`).
+- **Sensing** — RPLidar + IMU, SLAM via [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox).
+- **Navigation** — NAV2 with A* global planning and Regulated Pure Pursuit (RPP) following; AMCL on the built map.
+- **Mission** — scenario planner that dispatches the right 4WS primitive for each parking manoeuvre.
 
-Required packages include:
-- ros-humble-desktop
-- python3-colcon-common-extensions
-- ros-humble-ros-gz
-- ros-humble-ros2-control
-- ros-humble-nav2-amcl
-- ros-humble-nav2-bringup
+## Kinematic modes
 
-Helpful:
-- ros-humble-ign-ros2-control-demos
+| Mode | Front wheels | Rear wheels | Body motion |
+|------|--------------|-------------|-------------|
+| Ackermann | steer | straight | forward with yaw |
+| Crab | same direction as rear | same as front | translate along `(vₓ, vᵧ)`, no yaw |
+| Counter-steer | steer one way | steer the other way | forward with halved turning radius |
+| Pivot | tangent to chassis circle | tangent to chassis circle | rotate in place |
 
-## Instructions
+Equations: [`docs/kinematics.md`](docs/kinematics.md). Cross-implementation fixtures: [`docs/kinematic_fixtures.md`](docs/kinematic_fixtures.md).
 
-1. Make directory from ${HOME} <br/>
-   `mkdir -p ros2_ws/dev_ws/src`
-2. Go into directory <br/>
-   `cd ros2_ws/dev_ws/src`
-3. Clone packages `park_bot`, `fws_controller` and `rf2o_laser_odometry`<br/>
-   `gh repo clone nishalangovender/park_bot` <br/>
-   `gh repo clone nishalangovender/fws_controller` <br />
-   `gh repo clone nishalangovender/rf2o_laser_odometry`
-4. Move into workspace <br/>
-   `cd ..`
-5. Build with colcon <br/>
-   `colcon build --symlink-install`
-6. Source environment variable <br/>
-   `source install/setup.bash`
+## Quickstart
 
-# Methodology
+### Native (Ubuntu 22.04)
 
-## Robot State Publisher
+```bash
+mkdir -p ~/ros2_ws/src && cd ~/ros2_ws/src
+gh repo clone nishalangovender/park_bot
+gh repo clone nishalangovender/fws_controller
+gh repo clone nishalangovender/rf2o_laser_odometry
+cd ~/ros2_ws
+src/park_bot/scripts/build.sh
+src/park_bot/scripts/run_sim.sh
+```
 
-1. Test `robot_state_publisher` with launch file <br/>
-   Terminal 1: `ros2 launch park_bot rsp.launch.py` <br/>
-   Terminal 2: `ros2 run joint_state_publisher_gui joint_state_publisher_gui` <br/>
-   Terminal 3: `rviz2 -d view_bot.rviz`
+### Docker (headless, reproducible build)
 
-## Ignition Gazebo
+The Dockerfile produces a headless `ros:humble` container with the workspace pre-built. Useful for CI parity and for validating the package descriptor on any machine. **For full GUI simulation (Gazebo + RViz) on macOS, use the native path** — running the GUI inside the container on Apple Silicon needs XQuartz gymnastics that aren't worth the trouble right now.
 
-2. Test Ignition Gazebo Spawn with launch file <br/>
-   `ros2 launch park_bot rsp_sim.launch.py`
+```bash
+docker compose up --build
+docker compose exec park_bot bash
+# inside container:
+ros2 launch park_bot sim.launch.py
+```
 
-## Simulation
+### Windows
 
-3. Test full simulation in Ignition Gazebo, using ROS2 Control, SLAM and NAV2 with launch file <br/>
-   Terminal 1: `ros2 launch park_bot sim.launch.py` <br/>
-   Terminal 2: `rviz2 -d src/park_bot/config/main.rviz` <br/>
-   Terimnal 3: `ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true`
+Windows support is a best-effort convenience; ROS2 Humble has full Tier 1 support on Ubuntu 22.04, which is the recommended path.
 
-4. Set `Goal Pose` and watch the park_bot move!
+```cmd
+scripts\build.bat
+scripts\run_sim.bat
+```
 
-## Notes
+## Tests
 
-Using Robot Package Template by Josh Newans. <br/>
-If you are learning robotics, ROS2, Gazebo etc., I strongly recommend Articulated Robotics (https://articualtedrobotics.xyz) and YouTube channel (https://www.youtube.com/@ArticulatedRobotics).
+```bash
+python3 -m pytest test/ -v
+```
+
+Expect every kinematic case defined in `docs/kinematic_fixtures.md` to pass within `1e-5`.
+
+## Repo map
+
+```
+park_bot/
+├── .github/workflows/ci.yml   — lint / unit test / colcon build
+├── config/                    — robot, NAV2, SLAM, controller YAML
+├── description/               — URDF / xacro for the 4WS chassis
+├── docs/
+│   ├── architecture.svg       — stack block diagram
+│   ├── kinematics.md          — 4WS kinematic reference
+│   └── kinematic_fixtures.md  — cross-implementation fixture table
+├── launch/                    — ROS2 launch files
+├── park_bot/
+│   ├── __init__.py
+│   └── kinematics.py          — pure-Python 4WS module (no ROS imports)
+├── scripts/                   — build + run one-shot scripts (sh + bat)
+├── test/
+│   └── test_kinematics.py     — pytest cases
+├── worlds/                    — Ignition worlds
+├── Dockerfile
+├── docker-compose.yml
+├── CONTRIBUTING.md
+└── LICENSE
+```
+
+## Related repos
+
+- [`fws_controller`](https://github.com/nishalangovender/fws_controller) — ros2_control controller plugin for the 4WS vehicle.
+- [`rf2o_laser_odometry`](https://github.com/nishalangovender/rf2o_laser_odometry) — laser-based odometry.
+
+## Acknowledgements
+
+Built on the Robot Package Template by Josh Newans — [Articulated Robotics](https://articulatedrobotics.xyz). Thesis supervision by Prof J Engelbrecht, Stellenbosch University Department of Mechanical and Mechatronic Engineering.
+
+## Licence
+
+MIT — see [`LICENSE`](LICENSE).
