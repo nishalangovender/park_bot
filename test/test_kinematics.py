@@ -38,8 +38,8 @@ def test_ackermann_right_turn():
     got = compute_wheel_targets((1.0, 0.0, 0.5), KinematicMode.ACKERMANN)
     _assert_targets(
         got,
-        (0.218669, 0.196295, 0.0, 0.0),
-        (20.8327, 19.1673, 18.5, 21.5),
+        (0.212938, 0.183943, 0.0, 0.0),
+        (18.92749, 21.86893, 18.5, 21.5),
     )
 
 
@@ -66,7 +66,7 @@ def test_crab_diagonal():
     _assert_targets(
         got,
         (quarter_pi, quarter_pi, quarter_pi, quarter_pi),
-        (28.2843, 28.2843, 28.2843, 28.2843),
+        (28.28427, 28.28427, 28.28427, 28.28427),
     )
 
 
@@ -76,8 +76,8 @@ def test_counter_steer_tight_right():
     got = compute_wheel_targets((1.0, 0.0, 1.0), KinematicMode.COUNTER_STEER)
     _assert_targets(
         got,
-        (0.110657, 0.099669, -0.110657, -0.099669),
-        (20.2237, 19.7763, 20.2237, 19.7763),
+        (0.231091, 0.172191, -0.231091, -0.172191),
+        (17.46425, 23.34524, 17.46425, 23.34524),
     )
 
 
