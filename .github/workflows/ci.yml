@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install ament linters
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pep257
+      - name: flake8
+        run: flake8 park_bot test
+      - name: pep257
+        run: pep257 park_bot
+
+  test:
+    name: Unit tests (kinematics)
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install pytest
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+      - name: Run pytest
+        run: pytest test/ -v
+
+  build:
+    name: colcon build (ros:humble)
+    runs-on: ubuntu-22.04
+    container:
+      image: osrf/ros:humble-desktop
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: src/park_bot
+      - name: colcon build
+        shell: bash
+        run: |
+          source /opt/ros/humble/setup.bash
+          colcon build --packages-select park_bot
