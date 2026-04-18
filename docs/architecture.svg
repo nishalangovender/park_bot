@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" font-family="-apple-system, 'Segoe UI', sans-serif">
+  <style>
+    .b { fill: #fff; stroke: #0066FF; stroke-width: 1.5; }
+    .lbl { font-size: 13px; fill: #1A1A1A; font-weight: 600; }
+    .sub { font-size: 10px; fill: #737373; letter-spacing: 0.06em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+    .arrow { fill: none; stroke: #737373; stroke-width: 1.2; marker-end: url(#head); }
+  </style>
+  <defs>
+    <marker id="head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#737373"/>
+    </marker>
+  </defs>
+
+  <!-- Row 1: Sim sources -->
+  <rect class="b" x="30"  y="40"  width="160" height="70" rx="6"/>
+  <text class="sub" x="40" y="58">Simulation</text>
+  <text class="lbl" x="40" y="80">Ignition Gazebo</text>
+  <text class="lbl" x="40" y="98">+ RViz</text>
+
+  <!-- Row 2: ROS2 control -->
+  <rect class="b" x="240" y="40" width="160" height="70" rx="6"/>
+  <text class="sub" x="250" y="58">Control Bridge</text>
+  <text class="lbl" x="250" y="80">ros2_control</text>
+  <text class="lbl" x="250" y="98">joint command / state</text>
+
+  <!-- Row 3: Kinematics -->
+  <rect class="b" x="450" y="40" width="160" height="70" rx="6"/>
+  <text class="sub" x="460" y="58">Kinematics</text>
+  <text class="lbl" x="460" y="80">park_bot.kinematics</text>
+  <text class="lbl" x="460" y="98">4 modes</text>
+
+  <!-- Row 4: Vehicle -->
+  <rect class="b" x="660" y="40" width="150" height="70" rx="6"/>
+  <text class="sub" x="670" y="58">Plant</text>
+  <text class="lbl" x="670" y="80">4WS Chassis</text>
+  <text class="lbl" x="670" y="98">URDF + Gazebo</text>
+
+  <!-- Row 5: NAV2 and Mission -->
+  <rect class="b" x="240" y="200" width="160" height="70" rx="6"/>
+  <text class="sub" x="250" y="218">Navigation</text>
+  <text class="lbl" x="250" y="240">NAV2 + AMCL</text>
+  <text class="lbl" x="250" y="258">A* + RPP</text>
+
+  <rect class="b" x="450" y="200" width="160" height="70" rx="6"/>
+  <text class="sub" x="460" y="218">Mission</text>
+  <text class="lbl" x="460" y="240">Scenario Planner</text>
+  <text class="lbl" x="460" y="258">Primitive selector</text>
+
+  <rect class="b" x="30"  y="200" width="160" height="70" rx="6"/>
+  <text class="sub" x="40" y="218">Sensing</text>
+  <text class="lbl" x="40" y="240">RPLidar + IMU</text>
+  <text class="lbl" x="40" y="258">SLAM Toolbox</text>
+
+  <!-- Arrows -->
+  <path class="arrow" d="M190,75 L240,75"/>
+  <path class="arrow" d="M400,75 L450,75"/>
+  <path class="arrow" d="M610,75 L660,75"/>
+
+  <path class="arrow" d="M190,235 L240,235"/>
+  <path class="arrow" d="M400,235 L450,235"/>
+  <path class="arrow" d="M530,200 L530,110"/>
+  <path class="arrow" d="M320,200 L320,110"/>
+
+  <text class="sub" x="30" y="330">park_bot · 4WS autonomous parking stack</text>
+</svg>
