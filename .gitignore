@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Colcon
+build/
+install/
+log/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
