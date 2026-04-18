@@ -45,7 +45,7 @@ jobs:
     name: colcon build (ros:humble)
     runs-on: ubuntu-22.04
     container:
-      image: osrf/ros:humble-desktop
+      image: ros:humble-ros-base
     steps:
       - uses: actions/checkout@v4
         with:

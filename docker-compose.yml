@@ -1,0 +1,14 @@
+services:
+  park_bot:
+    build: .
+    container_name: park_bot
+    # Linux users who want RViz/Gazebo forwarded: uncomment the X11 block below
+    # and run `xhost +local:root` on the host first. macOS users: see README.
+    environment:
+      - ROS_DOMAIN_ID=0
+      # - DISPLAY=${DISPLAY}
+      # - QT_X11_NO_MITSHM=1
+    # volumes:
+    #   - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    stdin_open: true
+    tty: true
