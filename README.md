@@ -42,7 +42,7 @@ Equations: [`docs/kinematics.md`](docs/kinematics.md). Cross-implementation fixt
 mkdir -p ~/ros2_ws/src && cd ~/ros2_ws/src
 gh repo clone nishalangovender/park_bot
 gh repo clone nishalangovender/fws_controller
-gh repo clone nishalangovender/rf2o_laser_odometry
+gh repo clone MAPIRlab/rf2o_laser_odometry -- --branch ros2
 cd ~/ros2_ws
 src/park_bot/scripts/build.sh
 src/park_bot/scripts/run_sim.sh
@@ -104,7 +104,7 @@ park_bot/
 ## Related repos
 
 - [`fws_controller`](https://github.com/nishalangovender/fws_controller) — ros2_control controller plugin for the 4WS vehicle.
-- [`rf2o_laser_odometry`](https://github.com/nishalangovender/rf2o_laser_odometry) — laser-based odometry.
+- [`rf2o_laser_odometry`](https://github.com/MAPIRlab/rf2o_laser_odometry/tree/ros2) — laser-based odometry (upstream, `ros2` branch).
 
 ## Acknowledgements
 
